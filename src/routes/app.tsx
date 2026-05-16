@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { BottomNav } from "@/components/BottomNav";
+import { InstallPrompt } from "@/components/InstallPrompt";
 
 export const Route = createFileRoute("/app")({ component: AppLayout });
 
@@ -11,6 +12,7 @@ function AppLayout() {
         <div className="flex-1 overflow-y-auto no-scrollbar pb-28">
           <Outlet />
         </div>
+        <InstallPrompt />
         <BottomNav />
       </div>
     </PhoneFrame>
