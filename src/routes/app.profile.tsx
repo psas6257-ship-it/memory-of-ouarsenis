@@ -13,10 +13,10 @@ const stats = [
 ];
 
 const items = [
-  { icon: Bell, label: "الإشعارات", v: "مفعّلة" },
-  { icon: Globe, label: "اللغة", v: "العربية" },
-  { icon: Download, label: "إدارة التنزيلات", v: "256 م.ب" },
-  { icon: Settings, label: "الإعدادات", v: "" },
+  { icon: Bell, label: "الإشعارات", v: "", to: "/app/notifications" as const },
+  { icon: Globe, label: "اللغة", v: "العربية", to: "/app/settings" as const },
+  { icon: Download, label: "إدارة التنزيلات", v: "256 م.ب", to: "/app/settings" as const },
+  { icon: Settings, label: "الإعدادات", v: "", to: "/app/settings" as const },
 ];
 
 function Profile() {
@@ -71,7 +71,7 @@ function Profile() {
       <section className="mt-6 px-5">
         <div className="rounded-3xl glass overflow-hidden divide-y divide-white/5">
           {items.map((it) => (
-            <button key={it.label} className="w-full flex items-center justify-between p-4">
+            <Link key={it.label} to={it.to} className="w-full flex items-center justify-between p-4">
               <div className="flex items-center gap-3">
                 <div className="h-9 w-9 rounded-xl bg-white/5 grid place-items-center">
                   <it.icon className="h-4 w-4 text-[var(--gold)]" />
@@ -82,7 +82,7 @@ function Profile() {
                 {it.v}
                 <ChevronLeft className="h-4 w-4" />
               </div>
-            </button>
+            </Link>
           ))}
         </div>
         <button className="mt-4 w-full p-4 rounded-3xl glass flex items-center justify-center gap-2 text-sm text-red-300">
