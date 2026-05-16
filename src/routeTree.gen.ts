@@ -14,13 +14,22 @@ import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as VideoIdRouteImport } from './routes/video.$id'
+import { Route as StoryIdRouteImport } from './routes/story.$id'
 import { Route as ReadIdRouteImport } from './routes/read.$id'
+import { Route as FigureIdRouteImport } from './routes/figure.$id'
 import { Route as BookIdRouteImport } from './routes/book.$id'
+import { Route as AppTimelineRouteImport } from './routes/app.timeline'
 import { Route as AppStoriesRouteImport } from './routes/app.stories'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppSearchRouteImport } from './routes/app.search'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
+import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
 import { Route as AppMediaRouteImport } from './routes/app.media'
+import { Route as AppMapRouteImport } from './routes/app.map'
 import { Route as AppLibraryRouteImport } from './routes/app.library'
+import { Route as AppFiguresRouteImport } from './routes/app.figures'
+import { Route as AppDictionaryRouteImport } from './routes/app.dictionary'
+import { Route as AppAudioRouteImport } from './routes/app.audio'
 
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
@@ -47,9 +56,19 @@ const VideoIdRoute = VideoIdRouteImport.update({
   path: '/video/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StoryIdRoute = StoryIdRouteImport.update({
+  id: '/story/$id',
+  path: '/story/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReadIdRoute = ReadIdRouteImport.update({
   id: '/read/$id',
   path: '/read/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FigureIdRoute = FigureIdRouteImport.update({
+  id: '/figure/$id',
+  path: '/figure/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BookIdRoute = BookIdRouteImport.update({
@@ -57,9 +76,19 @@ const BookIdRoute = BookIdRouteImport.update({
   path: '/book/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppTimelineRoute = AppTimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppStoriesRoute = AppStoriesRouteImport.update({
   id: '/stories',
   path: '/stories',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => AppRoute,
 } as any)
 const AppSearchRoute = AppSearchRouteImport.update({
@@ -72,9 +101,19 @@ const AppProfileRoute = AppProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AppRoute,
 } as any)
+const AppNotificationsRoute = AppNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppMediaRoute = AppMediaRouteImport.update({
   id: '/media',
   path: '/media',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMapRoute = AppMapRouteImport.update({
+  id: '/map',
+  path: '/map',
   getParentRoute: () => AppRoute,
 } as any)
 const AppLibraryRoute = AppLibraryRouteImport.update({
@@ -82,31 +121,64 @@ const AppLibraryRoute = AppLibraryRouteImport.update({
   path: '/library',
   getParentRoute: () => AppRoute,
 } as any)
+const AppFiguresRoute = AppFiguresRouteImport.update({
+  id: '/figures',
+  path: '/figures',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDictionaryRoute = AppDictionaryRouteImport.update({
+  id: '/dictionary',
+  path: '/dictionary',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAudioRoute = AppAudioRouteImport.update({
+  id: '/audio',
+  path: '/audio',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/onboarding': typeof OnboardingRoute
+  '/app/audio': typeof AppAudioRoute
+  '/app/dictionary': typeof AppDictionaryRoute
+  '/app/figures': typeof AppFiguresRoute
   '/app/library': typeof AppLibraryRoute
+  '/app/map': typeof AppMapRoute
   '/app/media': typeof AppMediaRoute
+  '/app/notifications': typeof AppNotificationsRoute
   '/app/profile': typeof AppProfileRoute
   '/app/search': typeof AppSearchRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/stories': typeof AppStoriesRoute
+  '/app/timeline': typeof AppTimelineRoute
   '/book/$id': typeof BookIdRoute
+  '/figure/$id': typeof FigureIdRoute
   '/read/$id': typeof ReadIdRoute
+  '/story/$id': typeof StoryIdRoute
   '/video/$id': typeof VideoIdRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/onboarding': typeof OnboardingRoute
+  '/app/audio': typeof AppAudioRoute
+  '/app/dictionary': typeof AppDictionaryRoute
+  '/app/figures': typeof AppFiguresRoute
   '/app/library': typeof AppLibraryRoute
+  '/app/map': typeof AppMapRoute
   '/app/media': typeof AppMediaRoute
+  '/app/notifications': typeof AppNotificationsRoute
   '/app/profile': typeof AppProfileRoute
   '/app/search': typeof AppSearchRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/stories': typeof AppStoriesRoute
+  '/app/timeline': typeof AppTimelineRoute
   '/book/$id': typeof BookIdRoute
+  '/figure/$id': typeof FigureIdRoute
   '/read/$id': typeof ReadIdRoute
+  '/story/$id': typeof StoryIdRoute
   '/video/$id': typeof VideoIdRoute
   '/app': typeof AppIndexRoute
 }
@@ -115,13 +187,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/onboarding': typeof OnboardingRoute
+  '/app/audio': typeof AppAudioRoute
+  '/app/dictionary': typeof AppDictionaryRoute
+  '/app/figures': typeof AppFiguresRoute
   '/app/library': typeof AppLibraryRoute
+  '/app/map': typeof AppMapRoute
   '/app/media': typeof AppMediaRoute
+  '/app/notifications': typeof AppNotificationsRoute
   '/app/profile': typeof AppProfileRoute
   '/app/search': typeof AppSearchRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/stories': typeof AppStoriesRoute
+  '/app/timeline': typeof AppTimelineRoute
   '/book/$id': typeof BookIdRoute
+  '/figure/$id': typeof FigureIdRoute
   '/read/$id': typeof ReadIdRoute
+  '/story/$id': typeof StoryIdRoute
   '/video/$id': typeof VideoIdRoute
   '/app/': typeof AppIndexRoute
 }
@@ -131,26 +212,44 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/onboarding'
+    | '/app/audio'
+    | '/app/dictionary'
+    | '/app/figures'
     | '/app/library'
+    | '/app/map'
     | '/app/media'
+    | '/app/notifications'
     | '/app/profile'
     | '/app/search'
+    | '/app/settings'
     | '/app/stories'
+    | '/app/timeline'
     | '/book/$id'
+    | '/figure/$id'
     | '/read/$id'
+    | '/story/$id'
     | '/video/$id'
     | '/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/onboarding'
+    | '/app/audio'
+    | '/app/dictionary'
+    | '/app/figures'
     | '/app/library'
+    | '/app/map'
     | '/app/media'
+    | '/app/notifications'
     | '/app/profile'
     | '/app/search'
+    | '/app/settings'
     | '/app/stories'
+    | '/app/timeline'
     | '/book/$id'
+    | '/figure/$id'
     | '/read/$id'
+    | '/story/$id'
     | '/video/$id'
     | '/app'
   id:
@@ -158,13 +257,22 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/onboarding'
+    | '/app/audio'
+    | '/app/dictionary'
+    | '/app/figures'
     | '/app/library'
+    | '/app/map'
     | '/app/media'
+    | '/app/notifications'
     | '/app/profile'
     | '/app/search'
+    | '/app/settings'
     | '/app/stories'
+    | '/app/timeline'
     | '/book/$id'
+    | '/figure/$id'
     | '/read/$id'
+    | '/story/$id'
     | '/video/$id'
     | '/app/'
   fileRoutesById: FileRoutesById
@@ -174,7 +282,9 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   OnboardingRoute: typeof OnboardingRoute
   BookIdRoute: typeof BookIdRoute
+  FigureIdRoute: typeof FigureIdRoute
   ReadIdRoute: typeof ReadIdRoute
+  StoryIdRoute: typeof StoryIdRoute
   VideoIdRoute: typeof VideoIdRoute
 }
 
@@ -215,11 +325,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VideoIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/story/$id': {
+      id: '/story/$id'
+      path: '/story/$id'
+      fullPath: '/story/$id'
+      preLoaderRoute: typeof StoryIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/read/$id': {
       id: '/read/$id'
       path: '/read/$id'
       fullPath: '/read/$id'
       preLoaderRoute: typeof ReadIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/figure/$id': {
+      id: '/figure/$id'
+      path: '/figure/$id'
+      fullPath: '/figure/$id'
+      preLoaderRoute: typeof FigureIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/book/$id': {
@@ -229,11 +353,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/timeline': {
+      id: '/app/timeline'
+      path: '/timeline'
+      fullPath: '/app/timeline'
+      preLoaderRoute: typeof AppTimelineRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/stories': {
       id: '/app/stories'
       path: '/stories'
       fullPath: '/app/stories'
       preLoaderRoute: typeof AppStoriesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/search': {
@@ -250,11 +388,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProfileRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/notifications': {
+      id: '/app/notifications'
+      path: '/notifications'
+      fullPath: '/app/notifications'
+      preLoaderRoute: typeof AppNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/media': {
       id: '/app/media'
       path: '/media'
       fullPath: '/app/media'
       preLoaderRoute: typeof AppMediaRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/map': {
+      id: '/app/map'
+      path: '/map'
+      fullPath: '/app/map'
+      preLoaderRoute: typeof AppMapRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/library': {
@@ -264,24 +416,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLibraryRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/figures': {
+      id: '/app/figures'
+      path: '/figures'
+      fullPath: '/app/figures'
+      preLoaderRoute: typeof AppFiguresRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/dictionary': {
+      id: '/app/dictionary'
+      path: '/dictionary'
+      fullPath: '/app/dictionary'
+      preLoaderRoute: typeof AppDictionaryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/audio': {
+      id: '/app/audio'
+      path: '/audio'
+      fullPath: '/app/audio'
+      preLoaderRoute: typeof AppAudioRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppAudioRoute: typeof AppAudioRoute
+  AppDictionaryRoute: typeof AppDictionaryRoute
+  AppFiguresRoute: typeof AppFiguresRoute
   AppLibraryRoute: typeof AppLibraryRoute
+  AppMapRoute: typeof AppMapRoute
   AppMediaRoute: typeof AppMediaRoute
+  AppNotificationsRoute: typeof AppNotificationsRoute
   AppProfileRoute: typeof AppProfileRoute
   AppSearchRoute: typeof AppSearchRoute
+  AppSettingsRoute: typeof AppSettingsRoute
   AppStoriesRoute: typeof AppStoriesRoute
+  AppTimelineRoute: typeof AppTimelineRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAudioRoute: AppAudioRoute,
+  AppDictionaryRoute: AppDictionaryRoute,
+  AppFiguresRoute: AppFiguresRoute,
   AppLibraryRoute: AppLibraryRoute,
+  AppMapRoute: AppMapRoute,
   AppMediaRoute: AppMediaRoute,
+  AppNotificationsRoute: AppNotificationsRoute,
   AppProfileRoute: AppProfileRoute,
   AppSearchRoute: AppSearchRoute,
+  AppSettingsRoute: AppSettingsRoute,
   AppStoriesRoute: AppStoriesRoute,
+  AppTimelineRoute: AppTimelineRoute,
   AppIndexRoute: AppIndexRoute,
 }
 
@@ -292,9 +479,21 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   OnboardingRoute: OnboardingRoute,
   BookIdRoute: BookIdRoute,
+  FigureIdRoute: FigureIdRoute,
   ReadIdRoute: ReadIdRoute,
+  StoryIdRoute: StoryIdRoute,
   VideoIdRoute: VideoIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
