@@ -1,9 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { AppHeader } from "@/components/AppHeader";
-import { books, collections, videos, stories } from "@/data/content";
-import { Play, BookOpen, ChevronLeft } from "lucide-react";
+import { books, collections, videos } from "@/data/content";
+import { fullStories, quotes } from "@/data/heritage";
+import { Play, BookOpen, ChevronLeft, Users, Map, Clock, BookText, Headphones } from "lucide-react";
 import mountain from "@/assets/mountain-hero.jpg";
+
+const exploreItems = [
+  { to: "/app/figures", label: "أعلام المنطقة", icon: Users },
+  { to: "/app/map", label: "خريطة التراث", icon: Map },
+  { to: "/app/timeline", label: "الخط الزمني", icon: Clock },
+  { to: "/app/dictionary", label: "القاموس", icon: BookText },
+  { to: "/app/audio", label: "مكتبة الصوت", icon: Headphones },
+] as const;
 
 export const Route = createFileRoute("/app/")({ component: Home });
 
@@ -109,20 +118,54 @@ function Home() {
         </div>
       </Section>
 
+      {/* Explore grid */}
+      <Section title="اكتشف">
+        <div className="px-5 grid grid-cols-3 gap-2">
+          {exploreItems.map((it, idx) => (
+            <motion.div
+              key={it.to}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.05 }}
+            >
+              <Link to={it.to} className="aspect-square rounded-2xl glass flex flex-col items-center justify-center gap-2 hover:bg-white/5">
+                <div className="h-9 w-9 rounded-xl bg-[var(--gold)]/15 grid place-items-center">
+                  <it.icon className="h-4 w-4 text-[var(--gold)]" />
+                </div>
+                <span className="text-[11px] text-white/80 font-medium text-center px-1">{it.label}</span>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+
       {/* Stories */}
       <Section title="حكايات الجبل" link="/app/stories">
         <div className="px-5 space-y-3 pb-2">
-          {stories.slice(0, 2).map((s) => (
-            <div key={s.id} className="relative h-32 rounded-2xl overflow-hidden shadow-luxe">
+          {fullStories.slice(0, 2).map((s) => (
+            <Link key={s.id} to="/story/$id" params={{ id: s.id }} className="block relative h-32 rounded-2xl overflow-hidden shadow-luxe">
               <img src={s.image} alt="" className="absolute inset-0 h-full w-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-l from-black/90 via-black/40 to-transparent" />
               <div className="absolute inset-0 p-4 flex flex-col justify-center max-w-[70%]">
                 <span className="text-[10px] text-[var(--gold)] tracking-widest">{s.readTime}</span>
                 <p className="text-base font-bold mt-1" style={{ fontFamily: "var(--font-display)" }}>{s.title}</p>
-                <p className="text-[11px] text-white/60 mt-1 line-clamp-2">{s.excerpt}</p>
+                <p className="text-[11px] text-white/60 mt-1 line-clamp-2">{s.subtitle}</p>
               </div>
-            </div>
+            </Link>
           ))}
+        </div>
+      </Section>
+
+      {/* Quote */}
+      <Section title="من ذاكرة الجبل">
+        <div className="px-5">
+          <div className="rounded-3xl glass-strong shadow-luxe p-6 relative overflow-hidden">
+            <span className="absolute -top-4 right-4 text-7xl text-[var(--gold)]/15 font-serif">"</span>
+            <p className="relative text-lg leading-relaxed italic" style={{ fontFamily: "var(--font-display)" }}>
+              {quotes[0].text}
+            </p>
+            <p className="relative mt-3 text-xs text-[var(--gold)]">— {quotes[0].author}</p>
+          </div>
         </div>
       </Section>
 
