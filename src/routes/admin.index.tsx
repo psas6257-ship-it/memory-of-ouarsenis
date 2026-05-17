@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { books, videos, stories } from "@/data/content";
-import { fullStories, historicalFigures, mapLocations, dictionary } from "@/data/heritage";
+import { fullStories, figures as historicalFigures, mapLocations, dictionary } from "@/data/heritage";
 import { BookOpen, Feather, Users, Map, Film, BookText, TrendingUp, Eye, Download, Star } from "lucide-react";
 import { motion } from "framer-motion";
 
