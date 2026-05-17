@@ -24,9 +24,6 @@ function QuoteGen() {
 
   const download = async () => {
     if (!cardRef.current) return;
-    const html2canvas = (await import("html2canvas-pro")).default.catch?.(() => null) as any;
-    // fallback: use canvas API to render
-    const c = cardRef.current;
     const w = 1080, h = 1080;
     const canvas = document.createElement("canvas");
     canvas.width = w; canvas.height = h;

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AppRouteImport } from './routes/app'
@@ -49,6 +50,11 @@ import { Route as AdminBooksRouteImport } from './routes/admin.books'
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuoteRoute = QuoteRouteImport.update({
+  id: '/quote',
+  path: '/quote',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingRoute = OnboardingRouteImport.update({
@@ -233,6 +239,7 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/quote': typeof QuoteRoute
   '/register': typeof RegisterRoute
   '/admin/books': typeof AdminBooksRoute
   '/admin/figures': typeof AdminFiguresRoute
@@ -269,6 +276,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/quote': typeof QuoteRoute
   '/register': typeof RegisterRoute
   '/admin/books': typeof AdminBooksRoute
   '/admin/figures': typeof AdminFiguresRoute
@@ -308,6 +316,7 @@ export interface FileRoutesById {
   '/app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/quote': typeof QuoteRoute
   '/register': typeof RegisterRoute
   '/admin/books': typeof AdminBooksRoute
   '/admin/figures': typeof AdminFiguresRoute
@@ -348,6 +357,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/login'
     | '/onboarding'
+    | '/quote'
     | '/register'
     | '/admin/books'
     | '/admin/figures'
@@ -384,6 +394,7 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/onboarding'
+    | '/quote'
     | '/register'
     | '/admin/books'
     | '/admin/figures'
@@ -422,6 +433,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/login'
     | '/onboarding'
+    | '/quote'
     | '/register'
     | '/admin/books'
     | '/admin/figures'
@@ -461,6 +473,7 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   LoginRoute: typeof LoginRoute
   OnboardingRoute: typeof OnboardingRoute
+  QuoteRoute: typeof QuoteRoute
   RegisterRoute: typeof RegisterRoute
   BookIdRoute: typeof BookIdRoute
   FigureIdRoute: typeof FigureIdRoute
@@ -476,6 +489,13 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quote': {
+      id: '/quote'
+      path: '/quote'
+      fullPath: '/quote'
+      preLoaderRoute: typeof QuoteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding': {
@@ -798,6 +818,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   LoginRoute: LoginRoute,
   OnboardingRoute: OnboardingRoute,
+  QuoteRoute: QuoteRoute,
   RegisterRoute: RegisterRoute,
   BookIdRoute: BookIdRoute,
   FigureIdRoute: FigureIdRoute,
