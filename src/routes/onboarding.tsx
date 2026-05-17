@@ -18,7 +18,7 @@ const slides = [
 function Onboarding() {
   const [i, setI] = useState(0);
   const navigate = useNavigate();
-  const next = () => (i < slides.length - 1 ? setI(i + 1) : navigate({ to: "/app" }));
+  const next = () => (i < slides.length - 1 ? setI(i + 1) : navigate({ to: "/login" }));
 
   return (
     <PhoneFrame>
