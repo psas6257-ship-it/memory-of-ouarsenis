@@ -19,11 +19,11 @@ function FiguresAdmin() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {figures.map((f) => (
           <div key={f.id} className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 flex gap-3">
-            <img src={f.image} className="h-16 w-16 rounded-xl object-cover" alt="" />
+            <img src={f.portrait} className="h-16 w-16 rounded-xl object-cover" alt="" />
             <div className="flex-1 min-w-0">
               <h3 className="font-bold text-sm">{f.name}</h3>
               <p className="text-[11px] text-white/55">{f.era}</p>
-              <p className="text-[11px] text-white/50 mt-1 line-clamp-2">{f.short}</p>
+              <p className="text-[11px] text-white/50 mt-1 line-clamp-2">{f.title}</p>
               <div className="flex gap-1 mt-2">
                 <button className="h-7 w-7 rounded-lg bg-white/5 grid place-items-center"><Edit3 className="h-3 w-3" /></button>
                 <button className="h-7 w-7 rounded-lg bg-red-500/10 text-red-300 grid place-items-center"><Trash2 className="h-3 w-3" /></button>

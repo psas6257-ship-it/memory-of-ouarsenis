@@ -10,8 +10,8 @@ export const Route = createFileRoute("/admin/timeline")({
         <p className="text-sm text-white/55 mt-1">{timeline.length} حدثاً تاريخياً</p>
       </div>
       <div className="rounded-2xl border border-white/10 divide-y divide-white/5">
-        {timeline.map((t) => (
-          <div key={t.id} className="p-4 flex items-start justify-between gap-4 hover:bg-white/[0.02]">
+        {timeline.map((t, i) => (
+          <div key={i} className="p-4 flex items-start justify-between gap-4 hover:bg-white/[0.02]">
             <div className="flex-1">
               <p className="text-xs text-[var(--gold)] font-semibold">{t.year}</p>
               <p className="font-semibold text-sm mt-0.5">{t.title}</p>

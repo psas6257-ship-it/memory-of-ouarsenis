@@ -16,7 +16,7 @@ export const Route = createFileRoute("/admin/map")({
               <div className="h-10 w-10 rounded-xl bg-[var(--gold)]/15 grid place-items-center"><MapPin className="h-4 w-4 text-[var(--gold)]" /></div>
               <div>
                 <p className="font-semibold text-sm">{m.name}</p>
-                <p className="text-[11px] text-white/55">{m.type} · {m.lat.toFixed(3)}, {m.lng.toFixed(3)}</p>
+                <p className="text-[11px] text-white/55">{m.type} · ({m.x}%, {m.y}%)</p>
               </div>
             </div>
             <button className="h-8 w-8 rounded-lg bg-white/5 grid place-items-center"><Edit3 className="h-3.5 w-3.5" /></button>

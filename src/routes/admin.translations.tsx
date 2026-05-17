@@ -25,8 +25,8 @@ function TransAdmin() {
         <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="بحث..." className="bg-transparent text-sm flex-1 outline-none" />
       </div>
       <div className="rounded-2xl border border-white/10 divide-y divide-white/5">
-        {list.map((d) => (
-          <div key={d.id} className="p-4 flex items-center justify-between hover:bg-white/[0.02]">
+        {list.map((d, i) => (
+          <div key={i} className="p-4 flex items-center justify-between hover:bg-white/[0.02]">
             <div>
               <p className="font-bold text-sm">{d.word}</p>
               <p className="text-[11px] text-white/55 mt-0.5">{d.meaning}</p>

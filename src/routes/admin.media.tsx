@@ -21,7 +21,7 @@ export const Route = createFileRoute("/admin/media")({
               <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-purple-500/30 to-rose-500/20 grid place-items-center"><Music className="h-4 w-4" /></div>
               <div>
                 <p className="font-semibold text-sm">{a.title}</p>
-                <p className="text-[11px] text-white/55">{a.narrator} · {a.duration}</p>
+                <p className="text-[11px] text-white/55">{a.artist} · {a.duration}</p>
               </div>
             </div>
             <div className="flex gap-1.5">
