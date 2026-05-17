@@ -1,8 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { AppHeader } from "@/components/AppHeader";
 import { books } from "@/data/content";
-import { Bookmark, Download, Heart, Settings, Globe, Bell, LogOut, ChevronLeft } from "lucide-react";
+import { Bookmark, Download, Heart, Settings, Globe, Bell, LogOut, ChevronLeft, Shield, Quote } from "lucide-react";
+import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/app/profile")({ component: Profile });
 
@@ -20,6 +21,9 @@ const items = [
 ];
 
 function Profile() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const onLogout = () => { logout(); navigate({ to: "/login" }); };
   return (
     <div>
       <AppHeader title="حسابي" greeting="مرحباً" />
@@ -35,11 +39,11 @@ function Profile() {
           <div className="relative flex items-center gap-4">
             <div className="h-16 w-16 rounded-2xl grid place-items-center text-xl font-bold"
               style={{ background: "linear-gradient(135deg, var(--gold), var(--clay))" }}>
-              ز.ج
+              {(user?.name?.[0] || "ز")}
             </div>
             <div>
-              <h2 className="text-lg font-bold">زائر الجبل</h2>
-              <p className="text-xs text-white/55">عضو منذ ٢٠٢٦ • محبّ للتراث</p>
+              <h2 className="text-lg font-bold">{user?.name || "زائر الجبل"}</h2>
+              <p className="text-xs text-white/55">{user?.email || "عضو منذ ٢٠٢٦"}</p>
             </div>
           </div>
           <div className="relative mt-5 grid grid-cols-3 gap-2">
@@ -85,7 +89,15 @@ function Profile() {
             </Link>
           ))}
         </div>
-        <button className="mt-4 w-full p-4 rounded-3xl glass flex items-center justify-center gap-2 text-sm text-red-300">
+        <Link to="/quote" className="mt-3 w-full p-4 rounded-3xl glass flex items-center justify-center gap-2 text-sm text-[var(--gold)]">
+          <Quote className="h-4 w-4" /> مولّد بطاقات الاقتباس
+        </Link>
+        {user?.role === "admin" && (
+          <Link to="/admin" className="mt-3 w-full p-4 rounded-3xl bg-[var(--gold)]/15 border border-[var(--gold)]/30 flex items-center justify-center gap-2 text-sm text-[var(--gold)] font-semibold">
+            <Shield className="h-4 w-4" /> لوحة تحكم الإدارة
+          </Link>
+        )}
+        <button onClick={onLogout} className="mt-3 w-full p-4 rounded-3xl glass flex items-center justify-center gap-2 text-sm text-red-300">
           <LogOut className="h-4 w-4" /> تسجيل الخروج
         </button>
       </section>

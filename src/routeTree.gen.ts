@@ -9,10 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as AppRouteImport } from './routes/app'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as VideoIdRouteImport } from './routes/video.$id'
 import { Route as StoryIdRouteImport } from './routes/story.$id'
 import { Route as ReadIdRouteImport } from './routes/read.$id'
@@ -30,15 +35,46 @@ import { Route as AppLibraryRouteImport } from './routes/app.library'
 import { Route as AppFiguresRouteImport } from './routes/app.figures'
 import { Route as AppDictionaryRouteImport } from './routes/app.dictionary'
 import { Route as AppAudioRouteImport } from './routes/app.audio'
+import { Route as AdminVideosRouteImport } from './routes/admin.videos'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminTranslationsRouteImport } from './routes/admin.translations'
+import { Route as AdminTimelineRouteImport } from './routes/admin.timeline'
+import { Route as AdminStoriesRouteImport } from './routes/admin.stories'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminNotificationsRouteImport } from './routes/admin.notifications'
+import { Route as AdminMediaRouteImport } from './routes/admin.media'
+import { Route as AdminMapRouteImport } from './routes/admin.map'
+import { Route as AdminFiguresRouteImport } from './routes/admin.figures'
+import { Route as AdminBooksRouteImport } from './routes/admin.books'
 
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuoteRoute = QuoteRouteImport.update({
+  id: '/quote',
+  path: '/quote',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppRoute = AppRouteImport.update({
   id: '/app',
   path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -50,6 +86,11 @@ const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AppRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
 } as any)
 const VideoIdRoute = VideoIdRouteImport.update({
   id: '/video/$id',
@@ -136,11 +177,81 @@ const AppAudioRoute = AppAudioRouteImport.update({
   path: '/audio',
   getParentRoute: () => AppRoute,
 } as any)
+const AdminVideosRoute = AdminVideosRouteImport.update({
+  id: '/videos',
+  path: '/videos',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTranslationsRoute = AdminTranslationsRouteImport.update({
+  id: '/translations',
+  path: '/translations',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTimelineRoute = AdminTimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminStoriesRoute = AdminStoriesRouteImport.update({
+  id: '/stories',
+  path: '/stories',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminNotificationsRoute = AdminNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMediaRoute = AdminMediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMapRoute = AdminMapRouteImport.update({
+  id: '/map',
+  path: '/map',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFiguresRoute = AdminFiguresRouteImport.update({
+  id: '/figures',
+  path: '/figures',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBooksRoute = AdminBooksRouteImport.update({
+  id: '/books',
+  path: '/books',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/app': typeof AppRouteWithChildren
+  '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/quote': typeof QuoteRoute
+  '/register': typeof RegisterRoute
+  '/admin/books': typeof AdminBooksRoute
+  '/admin/figures': typeof AdminFiguresRoute
+  '/admin/map': typeof AdminMapRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/stories': typeof AdminStoriesRoute
+  '/admin/timeline': typeof AdminTimelineRoute
+  '/admin/translations': typeof AdminTranslationsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/videos': typeof AdminVideosRoute
   '/app/audio': typeof AppAudioRoute
   '/app/dictionary': typeof AppDictionaryRoute
   '/app/figures': typeof AppFiguresRoute
@@ -158,11 +269,26 @@ export interface FileRoutesByFullPath {
   '/read/$id': typeof ReadIdRoute
   '/story/$id': typeof StoryIdRoute
   '/video/$id': typeof VideoIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/quote': typeof QuoteRoute
+  '/register': typeof RegisterRoute
+  '/admin/books': typeof AdminBooksRoute
+  '/admin/figures': typeof AdminFiguresRoute
+  '/admin/map': typeof AdminMapRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/stories': typeof AdminStoriesRoute
+  '/admin/timeline': typeof AdminTimelineRoute
+  '/admin/translations': typeof AdminTranslationsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/videos': typeof AdminVideosRoute
   '/app/audio': typeof AppAudioRoute
   '/app/dictionary': typeof AppDictionaryRoute
   '/app/figures': typeof AppFiguresRoute
@@ -180,13 +306,29 @@ export interface FileRoutesByTo {
   '/read/$id': typeof ReadIdRoute
   '/story/$id': typeof StoryIdRoute
   '/video/$id': typeof VideoIdRoute
+  '/admin': typeof AdminIndexRoute
   '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/app': typeof AppRouteWithChildren
+  '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/quote': typeof QuoteRoute
+  '/register': typeof RegisterRoute
+  '/admin/books': typeof AdminBooksRoute
+  '/admin/figures': typeof AdminFiguresRoute
+  '/admin/map': typeof AdminMapRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/stories': typeof AdminStoriesRoute
+  '/admin/timeline': typeof AdminTimelineRoute
+  '/admin/translations': typeof AdminTranslationsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/videos': typeof AdminVideosRoute
   '/app/audio': typeof AppAudioRoute
   '/app/dictionary': typeof AppDictionaryRoute
   '/app/figures': typeof AppFiguresRoute
@@ -204,14 +346,30 @@ export interface FileRoutesById {
   '/read/$id': typeof ReadIdRoute
   '/story/$id': typeof StoryIdRoute
   '/video/$id': typeof VideoIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/app'
+    | '/login'
     | '/onboarding'
+    | '/quote'
+    | '/register'
+    | '/admin/books'
+    | '/admin/figures'
+    | '/admin/map'
+    | '/admin/media'
+    | '/admin/notifications'
+    | '/admin/settings'
+    | '/admin/stories'
+    | '/admin/timeline'
+    | '/admin/translations'
+    | '/admin/users'
+    | '/admin/videos'
     | '/app/audio'
     | '/app/dictionary'
     | '/app/figures'
@@ -229,11 +387,26 @@ export interface FileRouteTypes {
     | '/read/$id'
     | '/story/$id'
     | '/video/$id'
+    | '/admin/'
     | '/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/login'
     | '/onboarding'
+    | '/quote'
+    | '/register'
+    | '/admin/books'
+    | '/admin/figures'
+    | '/admin/map'
+    | '/admin/media'
+    | '/admin/notifications'
+    | '/admin/settings'
+    | '/admin/stories'
+    | '/admin/timeline'
+    | '/admin/translations'
+    | '/admin/users'
+    | '/admin/videos'
     | '/app/audio'
     | '/app/dictionary'
     | '/app/figures'
@@ -251,12 +424,28 @@ export interface FileRouteTypes {
     | '/read/$id'
     | '/story/$id'
     | '/video/$id'
+    | '/admin'
     | '/app'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/app'
+    | '/login'
     | '/onboarding'
+    | '/quote'
+    | '/register'
+    | '/admin/books'
+    | '/admin/figures'
+    | '/admin/map'
+    | '/admin/media'
+    | '/admin/notifications'
+    | '/admin/settings'
+    | '/admin/stories'
+    | '/admin/timeline'
+    | '/admin/translations'
+    | '/admin/users'
+    | '/admin/videos'
     | '/app/audio'
     | '/app/dictionary'
     | '/app/figures'
@@ -274,13 +463,18 @@ export interface FileRouteTypes {
     | '/read/$id'
     | '/story/$id'
     | '/video/$id'
+    | '/admin/'
     | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AppRoute: typeof AppRouteWithChildren
+  LoginRoute: typeof LoginRoute
   OnboardingRoute: typeof OnboardingRoute
+  QuoteRoute: typeof QuoteRoute
+  RegisterRoute: typeof RegisterRoute
   BookIdRoute: typeof BookIdRoute
   FigureIdRoute: typeof FigureIdRoute
   ReadIdRoute: typeof ReadIdRoute
@@ -290,6 +484,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quote': {
+      id: '/quote'
+      path: '/quote'
+      fullPath: '/quote'
+      preLoaderRoute: typeof QuoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/onboarding': {
       id: '/onboarding'
       path: '/onboarding'
@@ -297,11 +505,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/app': {
       id: '/app'
       path: '/app'
       fullPath: '/app'
       preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -317,6 +539,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/app/'
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/video/$id': {
       id: '/video/$id'
@@ -437,8 +666,117 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAudioRouteImport
       parentRoute: typeof AppRoute
     }
+    '/admin/videos': {
+      id: '/admin/videos'
+      path: '/videos'
+      fullPath: '/admin/videos'
+      preLoaderRoute: typeof AdminVideosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/translations': {
+      id: '/admin/translations'
+      path: '/translations'
+      fullPath: '/admin/translations'
+      preLoaderRoute: typeof AdminTranslationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/timeline': {
+      id: '/admin/timeline'
+      path: '/timeline'
+      fullPath: '/admin/timeline'
+      preLoaderRoute: typeof AdminTimelineRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/stories': {
+      id: '/admin/stories'
+      path: '/stories'
+      fullPath: '/admin/stories'
+      preLoaderRoute: typeof AdminStoriesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/notifications': {
+      id: '/admin/notifications'
+      path: '/notifications'
+      fullPath: '/admin/notifications'
+      preLoaderRoute: typeof AdminNotificationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/media': {
+      id: '/admin/media'
+      path: '/media'
+      fullPath: '/admin/media'
+      preLoaderRoute: typeof AdminMediaRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/map': {
+      id: '/admin/map'
+      path: '/map'
+      fullPath: '/admin/map'
+      preLoaderRoute: typeof AdminMapRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/figures': {
+      id: '/admin/figures'
+      path: '/figures'
+      fullPath: '/admin/figures'
+      preLoaderRoute: typeof AdminFiguresRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/books': {
+      id: '/admin/books'
+      path: '/books'
+      fullPath: '/admin/books'
+      preLoaderRoute: typeof AdminBooksRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
+
+interface AdminRouteChildren {
+  AdminBooksRoute: typeof AdminBooksRoute
+  AdminFiguresRoute: typeof AdminFiguresRoute
+  AdminMapRoute: typeof AdminMapRoute
+  AdminMediaRoute: typeof AdminMediaRoute
+  AdminNotificationsRoute: typeof AdminNotificationsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminStoriesRoute: typeof AdminStoriesRoute
+  AdminTimelineRoute: typeof AdminTimelineRoute
+  AdminTranslationsRoute: typeof AdminTranslationsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminVideosRoute: typeof AdminVideosRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminBooksRoute: AdminBooksRoute,
+  AdminFiguresRoute: AdminFiguresRoute,
+  AdminMapRoute: AdminMapRoute,
+  AdminMediaRoute: AdminMediaRoute,
+  AdminNotificationsRoute: AdminNotificationsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminStoriesRoute: AdminStoriesRoute,
+  AdminTimelineRoute: AdminTimelineRoute,
+  AdminTranslationsRoute: AdminTranslationsRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminVideosRoute: AdminVideosRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface AppRouteChildren {
   AppAudioRoute: typeof AppAudioRoute
@@ -476,8 +814,12 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   AppRoute: AppRouteWithChildren,
+  LoginRoute: LoginRoute,
   OnboardingRoute: OnboardingRoute,
+  QuoteRoute: QuoteRoute,
+  RegisterRoute: RegisterRoute,
   BookIdRoute: BookIdRoute,
   FigureIdRoute: FigureIdRoute,
   ReadIdRoute: ReadIdRoute,
@@ -487,13 +829,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
