@@ -1,27 +1,74 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Send } from "lucide-react";
+import { notifications as seed } from "@/data/heritage";
+import { Edit3, Plus, Trash2, Bell, Send } from "lucide-react";
 import { useState } from "react";
+import { useLocalList } from "@/lib/use-local-list";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { toast } from "sonner";
+
+type Row = { id?: any; title: string; body: string; type?: string; date?: string };
 
 export const Route = createFileRoute("/admin/notifications")({ component: NotifAdmin });
 
 function NotifAdmin() {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [sent, setSent] = useState(false);
+  const { items, add, update, remove } = useLocalList<Row>("mom-admin-notif", seed as any);
+  const [editing, setEditing] = useState<Row | null>(null);
+  const [open, setOpen] = useState(false);
+
+  const save = (r: Row) => {
+    if (!r.title) return toast.error("العنوان مطلوب");
+    if (r.id) update(r.id, r); else add({ ...r, date: new Date().toISOString().slice(0, 10) });
+    toast.success("تم الحفظ"); setOpen(false);
+  };
+  const send = (r: Row) => toast.success(`تم إرسال: ${r.title}`);
 
   return (
-    <div className="space-y-6 max-w-2xl">
-      <div>
-        <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>مركز الإشعارات</h1>
-        <p className="text-sm text-white/55 mt-1">أرسل إشعاراً جديداً للمستخدمين</p>
-      </div>
-      <div className="space-y-3 p-5 rounded-2xl bg-white/[0.03] border border-white/10">
-        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="عنوان الإشعار" className="w-full h-11 rounded-xl bg-white/5 border border-white/10 px-3 text-sm outline-none" />
-        <textarea value={body} onChange={(e) => setBody(e.target.value)} rows={4} placeholder="نص الإشعار..." className="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-2 text-sm outline-none resize-none" />
-        <button onClick={() => { setSent(true); setTimeout(() => setSent(false), 2000); setTitle(""); setBody(""); }} className="h-10 px-4 rounded-xl bg-[var(--gold)] text-black text-sm font-semibold flex items-center gap-2">
-          <Send className="h-4 w-4" /> {sent ? "تم الإرسال ✓" : "إرسال"}
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>الإشعارات</h1>
+          <p className="text-sm text-white/55 mt-1">{items.length} إشعاراً</p>
+        </div>
+        <button onClick={() => { setEditing({ title: "", body: "", type: "info" }); setOpen(true); }} className="h-10 px-4 rounded-xl bg-[var(--gold)] text-black text-sm font-semibold flex items-center gap-2">
+          <Plus className="h-4 w-4" /> إنشاء
         </button>
       </div>
+      <div className="space-y-2">
+        {items.map((n: Row, i) => (
+          <div key={n.id ?? i} className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 flex gap-3">
+            <div className="h-10 w-10 rounded-lg bg-[var(--gold)]/15 grid place-items-center shrink-0"><Bell className="h-4 w-4 text-[var(--gold)]" /></div>
+            <div className="flex-1 min-w-0">
+              <p className="font-semibold text-sm">{n.title}</p>
+              <p className="text-[11px] text-white/55 mt-1 line-clamp-2">{n.body}</p>
+              <p className="text-[10px] text-white/40 mt-1">{n.date}</p>
+            </div>
+            <div className="flex gap-1.5 shrink-0">
+              <button onClick={() => send(n)} title="إرسال" className="h-8 w-8 rounded-lg bg-emerald-500/10 text-emerald-300 grid place-items-center"><Send className="h-3.5 w-3.5" /></button>
+              <button onClick={() => { setEditing(n); setOpen(true); }} className="h-8 w-8 rounded-lg bg-white/5 grid place-items-center"><Edit3 className="h-3.5 w-3.5" /></button>
+              <button onClick={() => { remove(n.id); toast.success("تم الحذف"); }} className="h-8 w-8 rounded-lg bg-red-500/10 text-red-300 grid place-items-center"><Trash2 className="h-3.5 w-3.5" /></button>
+            </div>
+          </div>
+        ))}
+      </div>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent>
+          <DialogHeader><DialogTitle>{editing?.id ? "تعديل" : "إنشاء"} إشعار</DialogTitle></DialogHeader>
+          {editing && (
+            <div className="space-y-3">
+              <input value={editing.title} onChange={(e) => setEditing({ ...editing, title: e.target.value })} placeholder="العنوان" className="w-full h-10 rounded-lg bg-white/5 border border-white/10 px-3 text-sm" />
+              <textarea value={editing.body} onChange={(e) => setEditing({ ...editing, body: e.target.value })} placeholder="نص الإشعار" rows={4} className="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-sm" />
+              <select value={editing.type} onChange={(e) => setEditing({ ...editing, type: e.target.value })} className="w-full h-10 rounded-lg bg-white/5 border border-white/10 px-3 text-sm">
+                <option value="info">معلومة</option>
+                <option value="new">محتوى جديد</option>
+                <option value="event">حدث</option>
+              </select>
+            </div>
+          )}
+          <DialogFooter>
+            <button onClick={() => editing && save(editing)} className="h-10 px-4 rounded-xl bg-[var(--gold)] text-black text-sm font-semibold">حفظ</button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
