@@ -3,7 +3,7 @@
  * استبدل المحتوى الداخلي بـ fetch(`${BASE}/...`) دون لمس الواجهات.
  */
 import { books as localBooks, videos as localVideos, type Book } from "@/data/content";
-import { stories as localStories, figures as localFigures, timeline as localTimeline, mapLocations as localMap } from "@/data/heritage";
+import { fullStories as localStories, figures as localFigures, timeline as localTimeline, mapLocations as localMap } from "@/data/heritage";
 
 export const BASE = import.meta.env.VITE_API_BASE_URL || "/api";
 const DELAY = 280;
@@ -47,8 +47,8 @@ export const api = {
     return wait({
       books: localBooks.filter((b) => b.title.toLowerCase().includes(t) || b.description.toLowerCase().includes(t)),
       videos: localVideos.filter((v) => v.title.toLowerCase().includes(t) || v.category.toLowerCase().includes(t)),
-      stories: localStories.filter((s) => s.title.toLowerCase().includes(t) || s.excerpt.toLowerCase().includes(t)),
-      figures: localFigures.filter((f) => f.name.toLowerCase().includes(t) || f.role.toLowerCase().includes(t)),
+      stories: localStories.filter((s: any) => s.title.toLowerCase().includes(t) || (s.subtitle || "").toLowerCase().includes(t)),
+      figures: localFigures.filter((f) => f.name.toLowerCase().includes(t) || f.title.toLowerCase().includes(t)),
     });
   },
 };
