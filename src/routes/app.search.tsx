@@ -1,25 +1,39 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { books, videos } from "@/data/content";
+import { api } from "@/lib/api";
+import { track } from "@/lib/analytics";
 import { ArrowRight, Search as SearchIcon, X } from "lucide-react";
 
 export const Route = createFileRoute("/app/search")({ component: Search });
 
 const recent = ["الونشريس", "سيدي رابح", "الشعر الملحون", "تيسمسيلت"];
 
+type Results = { books: any[]; videos: any[]; stories: any[]; figures: any[] };
+
 function Search() {
   const [q, setQ] = useState("");
+  const [results, setResults] = useState<Results>({ books: [], videos: [], stories: [], figures: [] });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const results = useMemo(() => {
-    if (!q.trim()) return { books: [], videos: [] };
-    const t = q.toLowerCase();
-    return {
-      books: books.filter((b) => b.title.includes(q) || b.description.includes(q)).slice(0, 6),
-      videos: videos.filter((v) => v.title.includes(q) || v.category.includes(q)).slice(0, 6),
-    };
+  useEffect(() => {
+    if (!q.trim()) { setResults({ books: [], videos: [], stories: [], figures: [] }); return; }
+    setLoading(true);
+    const t = setTimeout(async () => {
+      const r = await api.search(q);
+      setResults(r);
+      track("search", { q, hits: r.books.length + r.videos.length + r.stories.length + r.figures.length });
+      setLoading(false);
+    }, 200);
+    return () => clearTimeout(t);
   }, [q]);
+
+  // Share Target support: /app/search?q=...
+  useEffect(() => {
+    const p = new URLSearchParams(location.search).get("q");
+    if (p) setQ(p);
+  }, []);
 
   return (
     <div className="safe-top px-5 pt-3">
