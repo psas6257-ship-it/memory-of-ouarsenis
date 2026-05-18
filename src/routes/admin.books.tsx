@@ -1,7 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { books } from "@/data/content";
-import { Search, Plus, Edit3, Trash2, Download, ExternalLink } from "lucide-react";
-import { useState } from "react";
+import { books as seed } from "@/data/content";
+import { Search, Plus, Edit3, Trash2, Download, ExternalLink, Upload } from "lucide-react";
+import { useState, useRef } from "react";
+import { useLocalList } from "@/lib/use-local-list";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/admin/books")({ component: BooksAdmin });
 
