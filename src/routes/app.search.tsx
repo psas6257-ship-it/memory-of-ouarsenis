@@ -1,25 +1,39 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { books, videos } from "@/data/content";
+import { api } from "@/lib/api";
+import { track } from "@/lib/analytics";
 import { ArrowRight, Search as SearchIcon, X } from "lucide-react";
 
 export const Route = createFileRoute("/app/search")({ component: Search });
 
 const recent = ["الونشريس", "سيدي رابح", "الشعر الملحون", "تيسمسيلت"];
 
+type Results = { books: any[]; videos: any[]; stories: any[]; figures: any[] };
+
 function Search() {
   const [q, setQ] = useState("");
+  const [results, setResults] = useState<Results>({ books: [], videos: [], stories: [], figures: [] });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const results = useMemo(() => {
-    if (!q.trim()) return { books: [], videos: [] };
-    const t = q.toLowerCase();
-    return {
-      books: books.filter((b) => b.title.includes(q) || b.description.includes(q)).slice(0, 6),
-      videos: videos.filter((v) => v.title.includes(q) || v.category.includes(q)).slice(0, 6),
-    };
+  useEffect(() => {
+    if (!q.trim()) { setResults({ books: [], videos: [], stories: [], figures: [] }); return; }
+    setLoading(true);
+    const t = setTimeout(async () => {
+      const r = await api.search(q);
+      setResults(r);
+      track("search", { q, hits: r.books.length + r.videos.length + r.stories.length + r.figures.length });
+      setLoading(false);
+    }, 200);
+    return () => clearTimeout(t);
   }, [q]);
+
+  // Share Target support: /app/search?q=...
+  useEffect(() => {
+    const p = new URLSearchParams(location.search).get("q");
+    if (p) setQ(p);
+  }, []);
 
   return (
     <div className="safe-top px-5 pt-3">
@@ -92,7 +106,34 @@ function Search() {
               </div>
             </section>
           )}
-          {results.books.length === 0 && results.videos.length === 0 && (
+          {results.stories.length > 0 && (
+            <section>
+              <h3 className="text-xs font-semibold text-white/60 mb-2">الحكايات ({results.stories.length})</h3>
+              <div className="space-y-2">
+                {results.stories.slice(0, 6).map((s: any) => (
+                  <Link key={s.id} to="/story/$id" params={{ id: s.id }} className="block p-3 rounded-2xl glass">
+                    <p className="text-sm font-semibold line-clamp-1">{s.title}</p>
+                    <p className="text-[11px] text-white/50 mt-0.5 line-clamp-1">{s.subtitle}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+          {results.figures.length > 0 && (
+            <section>
+              <h3 className="text-xs font-semibold text-white/60 mb-2">الشخصيات ({results.figures.length})</h3>
+              <div className="grid grid-cols-3 gap-2">
+                {results.figures.slice(0, 6).map((f: any) => (
+                  <Link key={f.id} to="/figure/$id" params={{ id: f.id }} className="text-center">
+                    <img src={f.portrait} alt="" className="aspect-square w-full object-cover rounded-xl" />
+                    <p className="text-[10px] mt-1 line-clamp-1">{f.name}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+          {loading && <p className="text-center text-xs text-white/40">جاري البحث...</p>}
+          {!loading && results.books.length === 0 && results.videos.length === 0 && results.stories.length === 0 && results.figures.length === 0 && (
             <p className="text-center text-sm text-white/50 mt-12">لا توجد نتائج</p>
           )}
         </div>

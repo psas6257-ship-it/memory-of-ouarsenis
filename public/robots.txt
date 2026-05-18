@@ -1,2 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: https://memory-of-ouarsenis.lovable.app/sitemap.xml

@@ -54,12 +54,10 @@ function LoginPage() {
           </button>
         </form>
 
-        <p className="text-center text-xs text-white/55 mt-6">
-          ليس لديك حساب؟{" "}
-          <Link to="/register" className="text-[var(--gold)] font-semibold">
-            إنشاء حساب
-          </Link>
-        </p>
+        <div className="flex items-center justify-between mt-4 text-xs">
+          <Link to="/forgot-password" className="text-white/60 hover:text-[var(--gold)]">نسيت كلمة المرور؟</Link>
+          <Link to="/register" className="text-[var(--gold)] font-semibold">إنشاء حساب</Link>
+        </div>
 
         <div className="mt-auto pt-8 text-center">
           <p className="text-[10px] text-white/35">
