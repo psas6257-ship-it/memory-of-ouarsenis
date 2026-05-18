@@ -106,7 +106,34 @@ function Search() {
               </div>
             </section>
           )}
-          {results.books.length === 0 && results.videos.length === 0 && (
+          {results.stories.length > 0 && (
+            <section>
+              <h3 className="text-xs font-semibold text-white/60 mb-2">الحكايات ({results.stories.length})</h3>
+              <div className="space-y-2">
+                {results.stories.slice(0, 6).map((s: any) => (
+                  <Link key={s.id} to="/story/$id" params={{ id: s.id }} className="block p-3 rounded-2xl glass">
+                    <p className="text-sm font-semibold line-clamp-1">{s.title}</p>
+                    <p className="text-[11px] text-white/50 mt-0.5 line-clamp-1">{s.subtitle}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+          {results.figures.length > 0 && (
+            <section>
+              <h3 className="text-xs font-semibold text-white/60 mb-2">الشخصيات ({results.figures.length})</h3>
+              <div className="grid grid-cols-3 gap-2">
+                {results.figures.slice(0, 6).map((f: any) => (
+                  <Link key={f.id} to="/figure/$id" params={{ id: f.id }} className="text-center">
+                    <img src={f.portrait} alt="" className="aspect-square w-full object-cover rounded-xl" />
+                    <p className="text-[10px] mt-1 line-clamp-1">{f.name}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+          {loading && <p className="text-center text-xs text-white/40">جاري البحث...</p>}
+          {!loading && results.books.length === 0 && results.videos.length === 0 && results.stories.length === 0 && results.figures.length === 0 && (
             <p className="text-center text-sm text-white/50 mt-12">لا توجد نتائج</p>
           )}
         </div>
