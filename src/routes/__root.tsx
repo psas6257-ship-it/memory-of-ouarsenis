@@ -11,6 +11,7 @@ import { AuthProvider } from "@/lib/auth";
 import { Toaster } from "@/components/ui/sonner";
 import { OfflineBanner } from "@/components/OfflineBanner";
 import { RegisterSW } from "@/components/RegisterSW";
+import "@/i18n";
 
 import appCss from "../styles.css?url";
 

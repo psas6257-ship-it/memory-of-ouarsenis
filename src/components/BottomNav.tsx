@@ -1,17 +1,18 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Home, Library, BookOpen, Film, User } from "lucide-react";
 import { motion } from "framer-motion";
-
-const tabs = [
-  { to: "/app", label: "الرئيسية", icon: Home, exact: true },
-  { to: "/app/library", label: "المكتبة", icon: Library },
-  { to: "/app/stories", label: "حكايات", icon: BookOpen },
-  { to: "/app/media", label: "وسائط", icon: Film },
-  { to: "/app/profile", label: "حسابي", icon: User },
-];
+import { useTranslation } from "react-i18next";
 
 export function BottomNav() {
+  const { t } = useTranslation();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const tabs = [
+    { to: "/app", label: t("nav.home"), icon: Home, exact: true },
+    { to: "/app/library", label: t("nav.library"), icon: Library },
+    { to: "/app/stories", label: t("nav.stories"), icon: BookOpen },
+    { to: "/app/media", label: t("nav.media"), icon: Film },
+    { to: "/app/profile", label: t("nav.profile"), icon: User },
+  ];
 
   return (
     <div className="absolute bottom-0 inset-x-0 z-40 safe-bottom px-3 pb-2 pt-2 pointer-events-none">
