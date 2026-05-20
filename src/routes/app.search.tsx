@@ -29,10 +29,16 @@ function Search() {
     return () => clearTimeout(t);
   }, [q]);
 
-  // Share Target support: /app/search?q=...
+  // Web Share Target support: accept ?q, ?title, ?text, ?url from PWA share intent
   useEffect(() => {
-    const p = new URLSearchParams(location.search).get("q");
-    if (p) setQ(p);
+    const sp = new URLSearchParams(location.search);
+    const parts = [sp.get("q"), sp.get("title"), sp.get("text"), sp.get("url")].filter(Boolean);
+    if (parts.length) {
+      // Extract a sensible search term: prefer explicit title/text, strip URL noise
+      const raw = parts.join(" ").trim();
+      const cleaned = raw.replace(/https?:\/\/\S+/g, "").trim() || raw;
+      setQ(cleaned);
+    }
   }, []);
 
   return (

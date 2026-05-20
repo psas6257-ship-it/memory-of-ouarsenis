@@ -24,7 +24,12 @@
   "share_target": {
     "action": "/app/search",
     "method": "GET",
-    "params": { "title": "q", "text": "q", "url": "q" }
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
   },
   "categories": ["education", "books", "culture"]
 }

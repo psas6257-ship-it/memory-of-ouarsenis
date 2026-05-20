@@ -3,6 +3,8 @@ import { AppHeader } from "@/components/AppHeader";
 import { motion } from "framer-motion";
 import { Moon, Languages, Type, Download, Bell, Shield, Info, ChevronLeft } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { setLang as applyLang } from "@/i18n";
 
 export const Route = createFileRoute("/app/settings")({ component: Settings });
 
@@ -22,32 +24,33 @@ function Toggle({ on, onChange }: { on: boolean; onChange: () => void }) {
 }
 
 function Settings() {
+  const { t, i18n } = useTranslation();
   const [dark, setDark] = useState(true);
   const [notif, setNotif] = useState(true);
   const [download, setDownload] = useState(false);
   const [font, setFont] = useState(16);
-  const [lang, setLang] = useState<"ar" | "fr" | "en" | "amz">("ar");
+  const lang = (i18n.language || "ar").slice(0, 2) as "ar" | "fr" | "en";
 
   return (
     <div>
-      <AppHeader title="الإعدادات" greeting="خصّص تجربتك" />
+      <AppHeader title={t("settings.title")} greeting={t("settings.subtitle")} />
       <div className="px-5 mt-2 space-y-5 pb-20">
-        <Section title="المظهر">
-          <Row icon={Moon} label="الوضع الداكن"><Toggle on={dark} onChange={() => setDark(!dark)} /></Row>
-          <Row icon={Type} label={`حجم الخطّ: ${font}px`}>
+        <Section title={t("settings.appearance")}>
+          <Row icon={Moon} label={t("settings.darkMode")}><Toggle on={dark} onChange={() => setDark(!dark)} /></Row>
+          <Row icon={Type} label={`${t("settings.fontSize")}: ${font}px`}>
             <input type="range" min={14} max={22} value={font} onChange={(e) => setFont(+e.target.value)} className="accent-[var(--gold)] w-32" />
           </Row>
         </Section>
 
-        <Section title="اللغة">
-          <div className="grid grid-cols-4 gap-2 p-2">
-            {(["ar", "fr", "en", "amz"] as const).map((l) => (
+        <Section title={t("settings.language")}>
+          <div className="grid grid-cols-3 gap-2 p-2">
+            {(["ar", "fr", "en"] as const).map((l) => (
               <button
                 key={l}
-                onClick={() => setLang(l)}
+                onClick={() => applyLang(l)}
                 className={`h-10 rounded-xl text-xs ${lang === l ? "bg-[var(--gold)]/20 text-[var(--gold)] border border-[var(--gold)]/40" : "bg-card/40 text-white/60 border border-white/5"}`}
               >
-                {l === "ar" ? "العربية" : l === "fr" ? "Français" : l === "en" ? "English" : "ⵜⵎⵣⵗⵜ"}
+                {l === "ar" ? "العربية" : l === "fr" ? "Français" : "English"}
               </button>
             ))}
           </div>
