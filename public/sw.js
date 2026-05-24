@@ -3,7 +3,7 @@
 //  - HTML navigations: network-first, fall back to cached page, then /offline
 //  - Static assets (js/css/images/fonts): stale-while-revalidate
 //  - Cross-origin: passthrough
-const CACHE = "mom-v3";
+const CACHE = "mom-v4";
 const OFFLINE_URL = "/offline";
 const PRECACHE = [
   "/",
