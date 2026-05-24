@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { timeline as seed } from "@/data/heritage";
-import { Edit3, Plus, Trash2 } from "lucide-react";
+import { Edit3, Plus } from "lucide-react";
 import { useState } from "react";
 import { useLocalList } from "@/lib/use-local-list";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { ConfirmDelete } from "@/components/ConfirmDelete";
 import { toast } from "sonner";
+
 
 type Row = { id?: any; year: string; title: string; description: string };
 
@@ -44,7 +46,7 @@ function TimelineAdmin() {
             </div>
             <div className="flex gap-1.5 shrink-0">
               <button onClick={() => startEdit(t)} className="h-8 w-8 rounded-lg bg-white/5 grid place-items-center"><Edit3 className="h-3.5 w-3.5" /></button>
-              <button onClick={() => { remove(t.id); toast.success("تم الحذف"); }} className="h-8 w-8 rounded-lg bg-red-500/10 text-red-300 grid place-items-center"><Trash2 className="h-3.5 w-3.5" /></button>
+              <ConfirmDelete onConfirm={() => { remove(t.id); toast.success("تم الحذف"); }} />
             </div>
           </div>
         ))}

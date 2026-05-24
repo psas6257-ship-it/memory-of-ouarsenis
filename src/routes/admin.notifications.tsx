@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { notifications as seed } from "@/data/heritage";
-import { Edit3, Plus, Trash2, Bell, Send } from "lucide-react";
+import { Edit3, Plus, Bell, Send } from "lucide-react";
 import { useState } from "react";
 import { useLocalList } from "@/lib/use-local-list";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { ConfirmDelete } from "@/components/ConfirmDelete";
 import { toast } from "sonner";
+
 
 type Row = { id?: any; title: string; body: string; type?: string; date?: string };
 
@@ -45,7 +47,7 @@ function NotifAdmin() {
             <div className="flex gap-1.5 shrink-0">
               <button onClick={() => send(n)} title="إرسال" className="h-8 w-8 rounded-lg bg-emerald-500/10 text-emerald-300 grid place-items-center"><Send className="h-3.5 w-3.5" /></button>
               <button onClick={() => { setEditing(n); setOpen(true); }} className="h-8 w-8 rounded-lg bg-white/5 grid place-items-center"><Edit3 className="h-3.5 w-3.5" /></button>
-              <button onClick={() => { remove(n.id); toast.success("تم الحذف"); }} className="h-8 w-8 rounded-lg bg-red-500/10 text-red-300 grid place-items-center"><Trash2 className="h-3.5 w-3.5" /></button>
+              <ConfirmDelete onConfirm={() => { remove(n.id); toast.success("تم الحذف"); }} />
             </div>
           </div>
         ))}
