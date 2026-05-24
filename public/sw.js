@@ -3,7 +3,7 @@
 //  - HTML navigations: network-first, fall back to cached page, then /offline
 //  - Static assets (js/css/images/fonts): stale-while-revalidate
 //  - Cross-origin: passthrough
-const CACHE = "mom-v3";
+const CACHE = "mom-v4";
 const OFFLINE_URL = "/offline";
 const PRECACHE = [
   "/",
@@ -16,9 +16,14 @@ const PRECACHE = [
 
 self.addEventListener("install", (e) => {
   e.waitUntil(
-    caches.open(CACHE).then((c) => c.addAll(PRECACHE)).then(() => self.skipWaiting())
+    caches.open(CACHE).then((c) => c.addAll(PRECACHE))
   );
 });
+
+self.addEventListener("message", (e) => {
+  if (e.data && e.data.type === "SKIP_WAITING") self.skipWaiting();
+});
+
 
 self.addEventListener("activate", (e) => {
   e.waitUntil(

@@ -1,34 +1,37 @@
 {
-  "nav": {
-    "home": "Accueil",
-    "library": "Bibliothèque",
-    "stories": "Récits",
-    "media": "Médias",
-    "profile": "Profil"
-  },
+  "nav": { "home": "Accueil", "library": "Bibliothèque", "stories": "Récits", "media": "Médias", "profile": "Profil" },
   "common": {
-    "search": "Rechercher",
-    "loading": "Chargement...",
-    "save": "Enregistrer",
-    "cancel": "Annuler",
-    "edit": "Modifier",
-    "delete": "Supprimer",
-    "add": "Ajouter",
-    "offline": "Vous êtes hors ligne",
-    "retry": "Réessayer",
-    "results": "résultats"
+    "search": "Rechercher", "loading": "Chargement...", "save": "Enregistrer", "cancel": "Annuler",
+    "edit": "Modifier", "delete": "Supprimer", "add": "Ajouter", "confirm": "Confirmer",
+    "offline": "Vous êtes hors ligne", "retry": "Réessayer", "results": "résultats", "yes": "Oui", "no": "Non"
   },
   "settings": {
-    "title": "Paramètres",
-    "subtitle": "Personnalisez votre expérience",
-    "appearance": "Apparence",
-    "darkMode": "Mode sombre",
-    "fontSize": "Taille de police",
-    "language": "Langue",
-    "about": "À propos"
+    "title": "Paramètres", "subtitle": "Personnalisez votre expérience",
+    "appearance": "Apparence", "darkMode": "Mode sombre", "lightMode": "Mode clair",
+    "fontSize": "Taille du texte", "reduceMotion": "Réduire les animations",
+    "language": "Langue", "reading": "Lecture et téléchargement",
+    "autoDownload": "Téléchargement automatique", "notifications": "Notifications de rappel",
+    "about": "À propos", "privacy": "Confidentialité et conditions",
+    "contributors": "Contributeurs", "version": "Version de l'application",
+    "reset": "Réinitialiser", "resetDone": "Paramètres réinitialisés"
+  },
+  "profile": {
+    "title": "Mon compte", "greeting": "Bienvenue", "guest": "Visiteur",
+    "memberSince": "Membre depuis 2026", "editProfile": "Modifier le profil",
+    "changePassword": "Changer le mot de passe", "name": "Nom", "bio": "Bio",
+    "favorites": "Favoris", "downloads": "Téléchargements", "bookmarks": "Signets",
+    "recent": "Mes lectures récentes", "quoteCards": "Générateur de citations",
+    "adminPanel": "Panneau d'administration", "logout": "Se déconnecter",
+    "currentPassword": "Mot de passe actuel", "newPassword": "Nouveau mot de passe",
+    "saved": "Enregistré"
   },
   "offline": {
     "title": "Pas de connexion Internet",
-    "body": "Memory of the Mountain fonctionne hors ligne pour le contenu mis en cache. Vérifiez votre réseau puis réessayez."
+    "body": "L'application fonctionne hors ligne pour le contenu déjà mis en cache."
+  },
+  "admin": {
+    "confirmDeleteTitle": "Confirmer la suppression",
+    "confirmDeleteBody": "Êtes-vous sûr de vouloir supprimer cet élément ?",
+    "deleted": "Supprimé", "saved": "Enregistré"
   }
 }

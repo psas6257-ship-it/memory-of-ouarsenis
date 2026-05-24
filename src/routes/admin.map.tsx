@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { mapLocations as seed } from "@/data/heritage";
-import { Edit3, Plus, Trash2, MapPin } from "lucide-react";
+import { Edit3, Plus, MapPin } from "lucide-react";
 import { useState } from "react";
 import { useLocalList } from "@/lib/use-local-list";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { ConfirmDelete } from "@/components/ConfirmDelete";
 import { toast } from "sonner";
+
 
 type Row = { id?: any; name: string; type: string; description: string; lat?: number; lng?: number };
 
@@ -43,7 +45,7 @@ function MapAdmin() {
             </div>
             <div className="flex flex-col gap-1.5 shrink-0">
               <button onClick={() => { setEditing(m); setOpen(true); }} className="h-7 w-7 rounded-lg bg-white/5 grid place-items-center"><Edit3 className="h-3 w-3" /></button>
-              <button onClick={() => { remove(m.id); toast.success("تم الحذف"); }} className="h-7 w-7 rounded-lg bg-red-500/10 text-red-300 grid place-items-center"><Trash2 className="h-3 w-3" /></button>
+              <ConfirmDelete onConfirm={() => { remove(m.id); toast.success("تم الحذف"); }} />
             </div>
           </div>
         ))}

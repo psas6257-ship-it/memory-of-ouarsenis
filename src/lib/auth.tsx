@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
-export type User = { email: string; name: string; role: "admin" | "user" };
+export type User = { email: string; name: string; role: "admin" | "user"; avatar?: string; bio?: string };
 
 const ADMIN = { email: "admin@univ.dz", password: "admin123", name: "المشرف", role: "admin" as const };
 const KEY = "mom-auth-v1";
@@ -12,6 +12,8 @@ type AuthCtx = {
   login: (email: string, password: string) => Promise<User>;
   register: (name: string, email: string, password: string) => Promise<User>;
   logout: () => void;
+  updateProfile: (patch: Partial<Pick<User, "name" | "avatar" | "bio">>) => void;
+  changePassword: (oldPassword: string, newPassword: string) => Promise<void>;
 };
 
 const Ctx = createContext<AuthCtx | null>(null);
@@ -66,7 +68,42 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = () => persist(null);
 
-  return <Ctx.Provider value={{ user, loading, login, register, logout }}>{children}</Ctx.Provider>;
+  const updateProfile: AuthCtx["updateProfile"] = (patch) => {
+    if (!user) return;
+    const next = { ...user, ...patch };
+    persist(next);
+    // sync name in registered users list too
+    try {
+      const list: Array<{ email: string; password: string; name: string }> = JSON.parse(
+        localStorage.getItem(USERS_KEY) || "[]"
+      );
+      const idx = list.findIndex((u) => u.email === user.email);
+      if (idx >= 0 && patch.name) {
+        list[idx].name = patch.name;
+        localStorage.setItem(USERS_KEY, JSON.stringify(list));
+      }
+    } catch {}
+  };
+
+  const changePassword: AuthCtx["changePassword"] = async (oldPassword, newPassword) => {
+    if (!user) throw new Error("غير مسجّل");
+    await new Promise((r) => setTimeout(r, 300));
+    if (user.email === ADMIN.email) throw new Error("لا يمكن تغيير كلمة سر المشرف");
+    const list: Array<{ email: string; password: string; name: string }> = JSON.parse(
+      localStorage.getItem(USERS_KEY) || "[]"
+    );
+    const idx = list.findIndex((u) => u.email === user.email);
+    if (idx < 0 || list[idx].password !== oldPassword) throw new Error("كلمة المرور الحالية غير صحيحة");
+    if (newPassword.length < 6) throw new Error("كلمة المرور قصيرة جداً");
+    list[idx].password = newPassword;
+    localStorage.setItem(USERS_KEY, JSON.stringify(list));
+  };
+
+  return (
+    <Ctx.Provider value={{ user, loading, login, register, logout, updateProfile, changePassword }}>
+      {children}
+    </Ctx.Provider>
+  );
 }
 
 export function useAuth() {
