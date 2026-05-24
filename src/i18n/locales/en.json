@@ -1,34 +1,37 @@
 {
-  "nav": {
-    "home": "Home",
-    "library": "Library",
-    "stories": "Stories",
-    "media": "Media",
-    "profile": "Profile"
-  },
+  "nav": { "home": "Home", "library": "Library", "stories": "Stories", "media": "Media", "profile": "Profile" },
   "common": {
-    "search": "Search",
-    "loading": "Loading...",
-    "save": "Save",
-    "cancel": "Cancel",
-    "edit": "Edit",
-    "delete": "Delete",
-    "add": "Add",
-    "offline": "You are offline",
-    "retry": "Retry",
-    "results": "results"
+    "search": "Search", "loading": "Loading...", "save": "Save", "cancel": "Cancel",
+    "edit": "Edit", "delete": "Delete", "add": "Add", "confirm": "Confirm",
+    "offline": "You are offline", "retry": "Retry", "results": "results", "yes": "Yes", "no": "No"
   },
   "settings": {
-    "title": "Settings",
-    "subtitle": "Customize your experience",
-    "appearance": "Appearance",
-    "darkMode": "Dark mode",
-    "fontSize": "Font size",
-    "language": "Language",
-    "about": "About"
+    "title": "Settings", "subtitle": "Customize your experience",
+    "appearance": "Appearance", "darkMode": "Dark mode", "lightMode": "Light mode",
+    "fontSize": "Font size", "reduceMotion": "Reduce motion",
+    "language": "Language", "reading": "Reading & downloads",
+    "autoDownload": "Auto-download new content", "notifications": "Reminder notifications",
+    "about": "About", "privacy": "Privacy & terms",
+    "contributors": "Contributors", "version": "App version",
+    "reset": "Reset to defaults", "resetDone": "Settings reset"
+  },
+  "profile": {
+    "title": "My account", "greeting": "Welcome", "guest": "Mountain visitor",
+    "memberSince": "Member since 2026", "editProfile": "Edit profile",
+    "changePassword": "Change password", "name": "Name", "bio": "Bio",
+    "favorites": "Favorites", "downloads": "Downloads", "bookmarks": "Bookmarks",
+    "recent": "My recent reads", "quoteCards": "Quote card generator",
+    "adminPanel": "Admin panel", "logout": "Sign out",
+    "currentPassword": "Current password", "newPassword": "New password",
+    "saved": "Saved"
   },
   "offline": {
     "title": "No internet connection",
-    "body": "Memory of the Mountain works offline for cached content. Check your network and retry."
+    "body": "The app works offline for previously cached content."
+  },
+  "admin": {
+    "confirmDeleteTitle": "Confirm delete",
+    "confirmDeleteBody": "Are you sure you want to delete this item?",
+    "deleted": "Deleted", "saved": "Saved"
   }
 }
