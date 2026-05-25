@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth";
 import { SettingsProvider } from "@/lib/settings";
+import { useTranslation } from "react-i18next";
 
 import { Toaster } from "@/components/ui/sonner";
 import { OfflineBanner } from "@/components/OfflineBanner";
@@ -18,20 +19,24 @@ import "@/i18n";
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
+  const { t } = useTranslation();
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
+        <div className="mx-auto h-20 w-20 rounded-3xl grid place-items-center mb-6"
+          style={{ background: "linear-gradient(135deg, var(--gold), var(--clay))" }}>
+          <span className="text-3xl font-black text-black/70">404</span>
+        </div>
+        <h1 className="text-2xl font-bold text-gradient-gold" style={{ fontFamily: "var(--font-display)" }}>
+          {t("errors.notFoundTitle")}
+        </h1>
+        <p className="mt-3 text-sm text-muted-foreground">{t("errors.notFoundBody")}</p>
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-2xl bg-[var(--gold)] px-5 py-2.5 text-sm font-bold text-black transition hover:opacity-90"
           >
-            Go home
+            {t("common.goHome")}
           </Link>
         </div>
       </div>
@@ -40,33 +45,31 @@ function NotFoundComponent() {
 }
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
-  console.error(error);
+  const { t } = useTranslation();
   const router = useRouter();
+  if (typeof window !== "undefined") console.error("[App Error]", error);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          {t("errors.errorTitle")}
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
+        <p className="mt-2 text-sm text-muted-foreground">{t("errors.errorBody")}</p>
+        {process.env.NODE_ENV !== "production" && (
+          <pre className="mt-3 max-h-32 overflow-auto text-[10px] text-red-300/70 bg-white/5 rounded-lg p-2 text-start" dir="ltr">
+            {String(error?.message ?? error)}
+          </pre>
+        )}
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            onClick={() => { router.invalidate(); reset(); }}
+            className="inline-flex items-center justify-center rounded-2xl bg-[var(--gold)] px-5 py-2.5 text-sm font-bold text-black transition hover:opacity-90"
           >
-            Try again
+            {t("errors.tryAgain")}
           </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
+          <a href="/" className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-foreground transition hover:bg-white/10">
+            {t("common.goHome")}
           </a>
         </div>
       </div>
