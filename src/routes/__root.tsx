@@ -56,7 +56,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           {t("errors.errorTitle")}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">{t("errors.errorBody")}</p>
-        {process.env.NODE_ENV !== "production" && (
+        {import.meta.env.DEV && (
           <pre className="mt-3 max-h-32 overflow-auto text-[10px] text-red-300/70 bg-white/5 rounded-lg p-2 text-start" dir="ltr">
             {String(error?.message ?? error)}
           </pre>
