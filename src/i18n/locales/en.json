@@ -3,7 +3,9 @@
   "common": {
     "search": "Search", "loading": "Loading...", "save": "Save", "cancel": "Cancel",
     "edit": "Edit", "delete": "Delete", "add": "Add", "confirm": "Confirm",
-    "offline": "You are offline", "retry": "Retry", "results": "results", "yes": "Yes", "no": "No"
+    "offline": "You are offline", "retry": "Retry", "results": "results",
+    "yes": "Yes", "no": "No", "back": "Back", "next": "Next",
+    "send": "Send", "continue": "Continue", "goHome": "Go home"
   },
   "settings": {
     "title": "Settings", "subtitle": "Customize your experience",
@@ -22,8 +24,7 @@
     "favorites": "Favorites", "downloads": "Downloads", "bookmarks": "Bookmarks",
     "recent": "My recent reads", "quoteCards": "Quote card generator",
     "adminPanel": "Admin panel", "logout": "Sign out",
-    "currentPassword": "Current password", "newPassword": "New password",
-    "saved": "Saved"
+    "currentPassword": "Current password", "newPassword": "New password", "saved": "Saved"
   },
   "offline": {
     "title": "No internet connection",
@@ -33,5 +34,75 @@
     "confirmDeleteTitle": "Confirm delete",
     "confirmDeleteBody": "Are you sure you want to delete this item?",
     "deleted": "Deleted", "saved": "Saved"
+  },
+  "onboarding": {
+    "slide1Title": "Heritage that lives in the mountain",
+    "slide1Text": "Discover the depth of Ouarsenis through thousands of documents, photos and stories.",
+    "slide2Title": "A premium digital library",
+    "slide2Text": "Thousands of pages of manuscripts and academic research at your fingertips.",
+    "slide3Title": "Living tales",
+    "slide3Text": "Listen, watch, read — a cinematic experience of collective memory."
+  },
+  "auth": {
+    "loginTitle": "Welcome back",
+    "loginSubtitle": "Sign in to continue your journey through the mountain's memory",
+    "registerTitle": "Join the memory",
+    "registerSubtitle": "Create your account and save your reading and listening progress",
+    "email": "Email address",
+    "password": "Password",
+    "fullName": "Full name",
+    "signIn": "Sign in",
+    "signUp": "Create account",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "forgot": "Forgot password?",
+    "demoAdmin": "Demo admin: admin@univ.dz / admin123",
+    "passwordShort": "Password too short (6 characters minimum)",
+    "forgotTitle": "Forgot your password?",
+    "forgotSubtitle": "We'll send you a reset link.",
+    "resetLinkSent": "Reset link sent",
+    "checkEmail": "Check your inbox — a reset link has been sent.",
+    "invalidEmail": "Invalid email"
+  },
+  "about": {
+    "title": "About",
+    "intro": "A digital project that preserves the cultural and literary heritage of Ouarsenis and presents it through an interactive, premium experience — combining academic books, folk tales, heritage figures, places, and audio/video recordings.",
+    "visionHeading": "Our vision",
+    "vision": "Bring Algerian heritage within reach of everyone through a cinematic mobile experience.",
+    "teamHeading": "Team",
+    "team": "A group of volunteer researchers, designers and developers serving collective memory."
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "intro": "We respect our users' privacy and only collect what is required to operate the app.",
+    "dataHeading": "Data we collect",
+    "data": "Email and name on signup, plus anonymous usage analytics to improve the service.",
+    "storageHeading": "Local storage",
+    "storage": "We use browser storage to save preferences, bookmarks and reading positions.",
+    "rightsHeading": "Your rights",
+    "rights": "You can delete your account and data at any time from the app settings.",
+    "updated": "Last updated: 2026"
+  },
+  "terms": {
+    "title": "Terms of use",
+    "intro": "By using the app, you agree to the following terms:",
+    "usageHeading": "Usage",
+    "usage": "Content is for educational and cultural purposes only. Commercial redistribution is not allowed without permission.",
+    "rightsHeading": "Intellectual property",
+    "rights": "All content remains the property of its owners. The app is a platform for heritage preservation.",
+    "accountHeading": "Account",
+    "account": "You are responsible for securing your account and any activity on it."
+  },
+  "contact": {
+    "title": "Contact us",
+    "name": "Name", "email": "Email", "message": "Your message",
+    "sent": "We received your message — we'll get back soon", "send": "Send"
+  },
+  "errors": {
+    "notFoundTitle": "Page not found",
+    "notFoundBody": "The page you're looking for doesn't exist or has been moved.",
+    "errorTitle": "This page didn't load",
+    "errorBody": "Something went wrong. You can try again or head back home.",
+    "tryAgain": "Try again"
   }
 }

@@ -5,6 +5,17 @@ import ar from "./locales/ar.json";
 import fr from "./locales/fr.json";
 import en from "./locales/en.json";
 
+export type Lang = "ar" | "fr" | "en";
+const RTL_LANGS: Lang[] = ["ar"];
+
+function applyDirection(lang: string) {
+  if (typeof document === "undefined") return;
+  const dir = RTL_LANGS.includes(lang as Lang) ? "rtl" : "ltr";
+  document.documentElement.lang = lang;
+  document.documentElement.dir = dir;
+  document.documentElement.setAttribute("data-lang", lang);
+}
+
 if (!i18n.isInitialized) {
   i18n
     .use(LanguageDetector)
@@ -23,15 +34,16 @@ if (!i18n.isInitialized) {
         lookupLocalStorage: "mom-lang",
         caches: ["localStorage"],
       },
-    });
+    })
+    .then(() => applyDirection(i18n.language));
+
+  // Dynamic RTL/LTR switch on every language change.
+  i18n.on("languageChanged", (lng) => applyDirection(lng));
 }
 
-export function setLang(lang: "ar" | "fr" | "en") {
+export function setLang(lang: Lang) {
   i18n.changeLanguage(lang);
-  if (typeof document !== "undefined") {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-  }
+  applyDirection(lang);
 }
 
 export default i18n;

@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PhoneFrame } from "@/components/PhoneFrame";
-import { ArrowRight, Mail, Phone, MapPin, Send } from "lucide-react";
+import { ArrowRight, ArrowLeft, Mail, Phone, MapPin, Send } from "lucide-react";
 import { useState } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/contact")({
   component: Contact,
@@ -23,6 +24,8 @@ const schema = z.object({
 });
 
 function Contact() {
+  const { t, i18n } = useTranslation();
+  const BackIcon = i18n.dir() === "rtl" ? ArrowRight : ArrowLeft;
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [err, setErr] = useState("");
   const submit = (e: React.FormEvent) => {
@@ -30,15 +33,15 @@ function Contact() {
     setErr("");
     const r = schema.safeParse(form);
     if (!r.success) return setErr(r.error.issues[0].message);
-    toast.success("تم استلام رسالتك، سنرد قريباً");
+    toast.success(t("contact.sent"));
     setForm({ name: "", email: "", message: "" });
   };
   return (
     <PhoneFrame>
       <div className="flex-1 overflow-y-auto safe-bottom">
         <header className="safe-top px-5 py-4 flex items-center gap-3 sticky top-0 glass-strong z-10">
-          <Link to="/" className="h-9 w-9 rounded-full bg-white/10 grid place-items-center"><ArrowRight className="h-4 w-4" /></Link>
-          <h1 className="text-lg font-bold">تواصل معنا</h1>
+          <Link to="/" aria-label={t("common.back")} className="h-9 w-9 rounded-full bg-white/10 grid place-items-center"><BackIcon className="h-4 w-4" /></Link>
+          <h1 className="text-lg font-bold">{t("contact.title")}</h1>
         </header>
         <div className="px-6 py-6 space-y-6">
           <div className="space-y-3">
@@ -47,11 +50,11 @@ function Contact() {
             <Row icon={MapPin} text="تيسمسيلت، الجزائر" />
           </div>
           <form onSubmit={submit} className="space-y-3 pt-4 border-t border-white/10">
-            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="الاسم" className="w-full h-11 rounded-xl bg-white/5 border border-white/10 px-4 text-sm" />
-            <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="البريد الإلكتروني" className="w-full h-11 rounded-xl bg-white/5 border border-white/10 px-4 text-sm" />
-            <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="رسالتك" rows={5} className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm" />
-            {err && <p className="text-xs text-red-400">{err}</p>}
-            <button className="w-full h-12 rounded-2xl bg-[var(--gold)] text-black font-bold text-sm flex items-center justify-center gap-2"><Send className="h-4 w-4" /> إرسال</button>
+            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder={t("contact.name")} aria-label={t("contact.name")} className="w-full h-11 rounded-xl bg-white/5 border border-white/10 px-4 text-sm" />
+            <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder={t("contact.email")} aria-label={t("contact.email")} className="w-full h-11 rounded-xl bg-white/5 border border-white/10 px-4 text-sm" />
+            <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder={t("contact.message")} aria-label={t("contact.message")} rows={5} className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm" />
+            {err && <p className="text-xs text-red-400" role="alert">{err}</p>}
+            <button className="w-full h-12 rounded-2xl bg-[var(--gold)] text-black font-bold text-sm flex items-center justify-center gap-2"><Send className="h-4 w-4" /> {t("contact.send")}</button>
           </form>
         </div>
       </div>

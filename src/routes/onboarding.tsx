@@ -1,24 +1,29 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { PhoneFrame } from "@/components/PhoneFrame";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import kasbah from "@/assets/heritage-kasbah.jpg";
 import manuscript from "@/assets/heritage-manuscript.jpg";
 import music from "@/assets/heritage-music.jpg";
 
 export const Route = createFileRoute("/onboarding")({ component: Onboarding });
 
-const slides = [
-  { image: kasbah, title: "تراث يسكن الجبل", text: "اكتشف عمق الونشريس عبر آلاف الوثائق والصور والقصص." },
-  { image: manuscript, title: "مكتبة رقمية فاخرة", text: "آلاف الصفحات من المخطوطات والأبحاث الأكاديمية بين يديك." },
-  { image: music, title: "حكايات حية", text: "استمع، شاهد، اقرأ — تجربة سينمائية للذاكرة الجماعية." },
-];
-
 function Onboarding() {
+  const { t, i18n } = useTranslation();
   const [i, setI] = useState(0);
   const navigate = useNavigate();
+  const isRtl = i18n.dir() === "rtl";
+
+  const slides = [
+    { image: kasbah, title: t("onboarding.slide1Title"), text: t("onboarding.slide1Text") },
+    { image: manuscript, title: t("onboarding.slide2Title"), text: t("onboarding.slide2Text") },
+    { image: music, title: t("onboarding.slide3Title"), text: t("onboarding.slide3Text") },
+  ];
+
   const next = () => (i < slides.length - 1 ? setI(i + 1) : navigate({ to: "/login" }));
+  const Arrow = isRtl ? ChevronLeft : ChevronRight;
 
   return (
     <PhoneFrame>
@@ -65,10 +70,11 @@ function Onboarding() {
             </div>
             <button
               onClick={next}
+              aria-label={t("common.next")}
               className="group relative h-14 w-14 rounded-full grid place-items-center shadow-luxe overflow-hidden"
               style={{ background: "linear-gradient(135deg, var(--gold), var(--clay))" }}
             >
-              <ChevronLeft className="h-6 w-6 text-black/80" strokeWidth={2.5} />
+              <Arrow className="h-6 w-6 text-black/80" strokeWidth={2.5} />
               <span className="absolute inset-0 rounded-full ring-1 ring-white/20" />
             </button>
           </div>

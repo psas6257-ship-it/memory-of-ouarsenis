@@ -3,7 +3,9 @@
   "common": {
     "search": "Rechercher", "loading": "Chargement...", "save": "Enregistrer", "cancel": "Annuler",
     "edit": "Modifier", "delete": "Supprimer", "add": "Ajouter", "confirm": "Confirmer",
-    "offline": "Vous êtes hors ligne", "retry": "Réessayer", "results": "résultats", "yes": "Oui", "no": "Non"
+    "offline": "Vous êtes hors ligne", "retry": "Réessayer", "results": "résultats",
+    "yes": "Oui", "no": "Non", "back": "Retour", "next": "Suivant",
+    "send": "Envoyer", "continue": "Continuer", "goHome": "Accueil"
   },
   "settings": {
     "title": "Paramètres", "subtitle": "Personnalisez votre expérience",
@@ -22,8 +24,7 @@
     "favorites": "Favoris", "downloads": "Téléchargements", "bookmarks": "Signets",
     "recent": "Mes lectures récentes", "quoteCards": "Générateur de citations",
     "adminPanel": "Panneau d'administration", "logout": "Se déconnecter",
-    "currentPassword": "Mot de passe actuel", "newPassword": "Nouveau mot de passe",
-    "saved": "Enregistré"
+    "currentPassword": "Mot de passe actuel", "newPassword": "Nouveau mot de passe", "saved": "Enregistré"
   },
   "offline": {
     "title": "Pas de connexion Internet",
@@ -33,5 +34,75 @@
     "confirmDeleteTitle": "Confirmer la suppression",
     "confirmDeleteBody": "Êtes-vous sûr de vouloir supprimer cet élément ?",
     "deleted": "Supprimé", "saved": "Enregistré"
+  },
+  "onboarding": {
+    "slide1Title": "Un patrimoine au cœur de la montagne",
+    "slide1Text": "Explorez la profondeur de l'Ouarsenis à travers des milliers de documents, photos et récits.",
+    "slide2Title": "Une bibliothèque numérique premium",
+    "slide2Text": "Des milliers de pages de manuscrits et de recherches à portée de main.",
+    "slide3Title": "Récits vivants",
+    "slide3Text": "Écoutez, regardez, lisez — une expérience cinématographique de la mémoire collective."
+  },
+  "auth": {
+    "loginTitle": "Bon retour",
+    "loginSubtitle": "Connectez-vous pour continuer votre voyage dans la mémoire de la montagne",
+    "registerTitle": "Rejoignez la mémoire",
+    "registerSubtitle": "Créez votre compte et sauvegardez votre progression",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "fullName": "Nom complet",
+    "signIn": "Se connecter",
+    "signUp": "Créer un compte",
+    "noAccount": "Pas de compte ?",
+    "hasAccount": "Déjà un compte ?",
+    "forgot": "Mot de passe oublié ?",
+    "demoAdmin": "Admin démo : admin@univ.dz / admin123",
+    "passwordShort": "Mot de passe trop court (6 caractères minimum)",
+    "forgotTitle": "Mot de passe oublié ?",
+    "forgotSubtitle": "Nous vous enverrons un lien de réinitialisation.",
+    "resetLinkSent": "Lien envoyé",
+    "checkEmail": "Vérifiez votre boîte mail — un lien de réinitialisation a été envoyé.",
+    "invalidEmail": "E-mail invalide"
+  },
+  "about": {
+    "title": "À propos",
+    "intro": "Un projet numérique dédié à la préservation du patrimoine culturel et littéraire de l'Ouarsenis, présenté à travers une expérience interactive premium — livres académiques, contes populaires, figures du patrimoine, lieux, et enregistrements audio/vidéo.",
+    "visionHeading": "Notre vision",
+    "vision": "Rendre le patrimoine algérien accessible à tous via une expérience mobile cinématographique.",
+    "teamHeading": "Équipe",
+    "team": "Un groupe de chercheurs, designers et développeurs bénévoles au service de la mémoire collective."
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "intro": "Nous respectons la vie privée de nos utilisateurs et ne collectons que ce qui est nécessaire au fonctionnement de l'application.",
+    "dataHeading": "Données collectées",
+    "data": "E-mail et nom lors de l'inscription, plus des statistiques d'usage anonymes pour améliorer le service.",
+    "storageHeading": "Stockage local",
+    "storage": "Nous utilisons le stockage du navigateur pour les préférences, signets et positions de lecture.",
+    "rightsHeading": "Vos droits",
+    "rights": "Vous pouvez supprimer votre compte et vos données à tout moment depuis les paramètres.",
+    "updated": "Dernière mise à jour : 2026"
+  },
+  "terms": {
+    "title": "Conditions d'utilisation",
+    "intro": "En utilisant l'application, vous acceptez les conditions suivantes :",
+    "usageHeading": "Utilisation",
+    "usage": "Le contenu est destiné à un usage éducatif et culturel. Toute redistribution commerciale est interdite sans autorisation.",
+    "rightsHeading": "Propriété intellectuelle",
+    "rights": "Tout le contenu reste la propriété de ses auteurs. L'application est une plateforme de préservation du patrimoine.",
+    "accountHeading": "Compte",
+    "account": "Vous êtes responsable de la sécurité de votre compte et de toute activité associée."
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "name": "Nom", "email": "E-mail", "message": "Votre message",
+    "sent": "Message reçu — nous répondrons bientôt", "send": "Envoyer"
+  },
+  "errors": {
+    "notFoundTitle": "Page introuvable",
+    "notFoundBody": "La page recherchée n'existe pas ou a été déplacée.",
+    "errorTitle": "Échec du chargement",
+    "errorBody": "Une erreur est survenue. Réessayez ou retournez à l'accueil.",
+    "tryAgain": "Réessayer"
   }
 }
